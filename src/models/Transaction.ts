@@ -9,11 +9,23 @@ class Transaction {
 
   type: 'income' | 'outcome';
 
-  constructor({ title, value, type }: Omit<Transaction, 'id'>) {
+  constructor({
+    title,
+    value,
+    type,
+  }: Omit<Transaction, 'id' | 'isOutcome' | 'isIncome'>) {
     this.id = uuid();
     this.title = title;
     this.value = value;
     this.type = type;
+  }
+
+  public isOutcome(): boolean {
+    return this.type === 'outcome';
+  }
+
+  public isIncome(): boolean {
+    return !this.isOutcome();
   }
 }
 
